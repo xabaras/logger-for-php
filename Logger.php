@@ -36,8 +36,8 @@ class Logger {
             $this->config = LoggerConfig::getDefaultConfig();
 
         $this->caller = $c;
-        $this->path = $config->logFilePath;
-        $this->name = $config->logNamePrefix . "_" . date("y-m-d") . ".log";
+        $this->path = $this->config->logFilePath;
+        $this->name = $this->config->logNamePrefix . "_" . date("y-m-d") . ".log";
     }
 	
 	public function info($text){
