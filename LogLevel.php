@@ -17,22 +17,19 @@
 #
 
 /**
- * Created by PhpStorm.
- * User: Paolo Montalto
- * Date: 14/09/17
- * Time: 11:31
+ * Class LogLevel
+ * created by Paolo Montalto
+ * p.montalto@xabaras.it
  */
+class LogLevel {
+	const ALL = 0;
+	const TRACE = 1;
+	const DEBUG = 2;
+	const INFO = 3;
+	const WARN = 4;
+	const ERROR = 5;
+	const FATAL = 6;
+	const OFF = 7;
+};
 
-class LoggerConfig
-{
-    public $logLevel;
-    public $logFilePath;
-    public $logNamePrefix;
-
-    public static function getDefaultConfig() {
-        $config = new LoggerConfig();
-        $config->logLevel = LogLevel::ALL;
-        $config->logFilePath = $_SERVER['DOCUMENT_ROOT'] . "log/";
-        $config->logNamePrefix = "log";
-    }
-}
+?>

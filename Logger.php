@@ -18,6 +18,8 @@
 
 /**
  * Class Logger v. 1.0
+ * created by Paolo Montalto
+ * p.montalto@xabaras.it
  */
 class Logger {
 	private $path;
