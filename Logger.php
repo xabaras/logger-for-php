@@ -1,5 +1,8 @@
 <?php
 
+include 'LogLevel.php';
+include 'LoggerConfig.php';
+
 #
 # This file is part of Logger for PHP.
 
@@ -30,7 +33,7 @@ class Logger {
     public function __construct($c, LoggerConfig $config = null) {
         $this->config = $config;
         if ( $this->config == null )
-            $this->$config = LoggerConfig::getDefaultConfig();
+            $this->config = LoggerConfig::getDefaultConfig();
 
         $this->caller = $c;
         $this->path = $config->logFilePath;
