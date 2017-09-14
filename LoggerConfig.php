@@ -32,5 +32,7 @@ class LoggerConfig
         $config->logLevel = LogLevel::ALL;
         $config->logFilePath = $_SERVER['DOCUMENT_ROOT'] . "log/";
         $config->logNamePrefix = "log";
+
+        return $config;
     }
 }
