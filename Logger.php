@@ -101,6 +101,11 @@ class Logger {
 	}
 	
 	private function append($text) {
+        //Check if the destination directory already exists.
+        if(!is_dir($this->path)){
+            //Directory does not exist, lets create it recursively.
+            mkdir($this->path, 0755, true);
+        }
 		$this->logFile = fopen($this->path . $this->name, 'a+');
 		fwrite($this->logFile, $text);
 		fwrite($this->logFile, "\n");
