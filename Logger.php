@@ -20,9 +20,8 @@ include 'LoggerConfig.php';
 #
 
 /**
- * Class Logger v. 1.0
- * created by Paolo Montalto
- * p.montalto@xabaras.it
+ * Logger for PHP 1.1
+ * created by Paolo Montalto <p.montalto[at]xabaras.it>
  */
 class Logger {
 	private $path;
@@ -31,13 +30,21 @@ class Logger {
 	private $config;
 
     public function __construct($c, LoggerConfig $config = null) {
-        $this->config = $config;
-        if ( $this->config == null )
-            $this->config = LoggerConfig::getDefaultConfig();
-
         $this->caller = $c;
-        $this->path = $this->config->logFilePath;
-        $this->name = $this->config->logNamePrefix . "_" . date("y-m-d") . ".log";
+        $this->updateConfiguration($config);
+    }
+
+    public function updateConfiguration(LoggerConfig $config = null) {
+        try {
+            $this->config = $config;
+            if ( $this->config == null )
+                $this->config = LoggerConfig::getDefaultConfig();
+
+            $this->path = $this->config->logFilePath;
+            $this->name = $this->config->logNamePrefix . "_" . date("y-m-d") . ".log";
+        } catch (Exception $e) {
+            print $e->getMessage();
+        }
     }
 	
 	public function info($text){
