@@ -6,11 +6,10 @@ Latest version: 1.2
 ## How do I get set up?
 Just add it to your project and import the Logger class into your php code and create a new instance
 
-```
+```php
 require_once 'logger-for-php/Logger.php';
 
 $logger = new Logger();
-
 ```
 
 ### Logger configuration
@@ -21,7 +20,7 @@ Like in modern logging systems you can set you own
  * a prefix for your log file (by defaut is 'log')
  
 In order to issue a new configuration you can create a new instance of the LoggerConfig class and pass it to the Logger constructor, e.g.:
-```
+```php
 $config = new LoggerConfig();
 $config->logLevel = LogLevel::ERROR;
 $config->logFilePath = $_SERVER['DOCUMENT_ROOT'] . "my_app_folder/log/";
@@ -31,7 +30,7 @@ $logger = new Logger($config);
 ``` 
 
 You can vary Logger configuration at any time by calling the 'updateConfiguration' method in the Logger object, like this
-```
+```php
 $logger->updateConfiguration($config);
 ```
 
@@ -52,7 +51,7 @@ Once you have your Logger instance, you can easily start logging events inside y
  * the 'text' of the message you want to log
  
  e.g.
-```
+```php
 $logger->debug("Home page", "Web app started!!!");
 
 
