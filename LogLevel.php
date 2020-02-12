@@ -17,9 +17,8 @@
 #
 
 /**
- * Class LogLevel
- * created by Paolo Montalto
- * p.montalto@xabaras.it
+ * Logger for PHP 1.2
+ * created by Paolo Montalto <p.montalto[at]xabaras.it>
  */
 class LogLevel {
 	const ALL = 0;

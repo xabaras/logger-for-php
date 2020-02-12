@@ -1,7 +1,7 @@
 <?php
 
-include 'LogLevel.php';
-include 'LoggerConfig.php';
+require_once 'LogLevel.php';
+require_once 'LoggerConfig.php';
 
 #
 # This file is part of Logger for PHP.
@@ -20,17 +20,15 @@ include 'LoggerConfig.php';
 #
 
 /**
- * Logger for PHP 1.1
+ * Logger for PHP 1.2
  * created by Paolo Montalto <p.montalto[at]xabaras.it>
  */
 class Logger {
-	private $path;
-	private $name;
-	private $caller;
-	private $config;
+    private $path;
+    private $name;
+    private $config;
 
-    public function __construct($c, LoggerConfig $config = null) {
-        $this->caller = $c;
+    public function __construct(LoggerConfig $config = null) {
         $this->updateConfiguration($config);
     }
 
@@ -46,78 +44,78 @@ class Logger {
             print $e->getMessage();
         }
     }
-	
-	public function info($text){
-		try {
-			if (LogLevel::INFO >= $this->logLevel){
-				$this->append("I/" . get_class($this->caller) .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
-			}
-		} catch (Exception $e) {
-			print $e->getMessage();
-		}
-	}
-	
-	public function debug($text){
-		try {
-			if (LogLevel::DEBUG >= $this->logLevel){
-				$this->append("D/" . get_class($this->caller) .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
-			}
-		} catch (Exception $e) {
-			print $e->getMessage();
-		}
-	}
-	
-	public function error($text){
-		try {
-			if (LogLevel::ERROR >= $this->logLevel){
-				$this->append("E/" . get_class($this->caller) .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
-			}
-		} catch (Exception $e) {
-			print $e->getMessage();
-		}
-	}
-	
-	public function fatal($text){
-		try {
-			if (LogLevel::FATAL >= $this->logLevel){
-				$this->append("F/" . get_class($this->caller) .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
-			}
-		} catch (Exception $e) {
-			print $e->getMessage();
-		}
-	}
-	
-	public function warn($text){
-		try {
-			if (LogLevel::WARN >= $this->logLevel){
-				$this->append("W/" . get_class($this->caller) .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
-			}
-		} catch (Exception $e) {
-			print $e->getMessage();
-		}
-	}
-	
-	public function trace($text){
-		try {
-			if (LogLevel::TRACE >= $this->logLevel){
-				$this->append("T/" . get_class($this->caller) .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
-			}
-		} catch (Exception $e) {
-			print $e->getMessage();
-		}
-	}
-	
-	private function append($text) {
+
+    public function info($tag, $text){
+        try {
+            if (LogLevel::INFO >= $this->config->logLevel){
+                $this->append("I/" . $tag .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
+            }
+        } catch (Exception $e) {
+            print $e->getMessage();
+        }
+    }
+
+    public function debug($tag, $text){
+        try {
+            if (LogLevel::DEBUG >= $this->config->logLevel){
+                $this->append("D/" . $tag .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
+            }
+        } catch (Exception $e) {
+            print $e->getMessage();
+        }
+    }
+
+    public function error($tag, $text){
+        try {
+            if (LogLevel::ERROR >= $this->config->logLevel){
+                $this->append("E/" . $tag .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
+            }
+        } catch (Exception $e) {
+            print $e->getMessage();
+        }
+    }
+
+    public function fatal($tag, $text){
+        try {
+            if (LogLevel::FATAL >= $this->config->logLevel){
+                $this->append("F/" . $tag .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
+            }
+        } catch (Exception $e) {
+            print $e->getMessage();
+        }
+    }
+
+    public function warn($tag, $text){
+        try {
+            if (LogLevel::WARN >= $this->config->logLevel){
+                $this->append("W/" . $tag .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
+            }
+        } catch (Exception $e) {
+            print $e->getMessage();
+        }
+    }
+
+    public function trace($tag, $text){
+        try {
+            if (LogLevel::TRACE >= $this->config->logLevel){
+                $this->append("T/" . $tag .  " [ " . date("d/M/y H:i:s") . " ]: " . utf8_decode($text));
+            }
+        } catch (Exception $e) {
+            print $e->getMessage();
+        }
+    }
+
+    private function append($text) {
         //Check if the destination directory already exists.
         if(!is_dir($this->path)){
             //Directory does not exist, lets create it recursively.
             mkdir($this->path, 0755, true);
         }
-		$this->logFile = fopen($this->path . $this->name, 'a+');
-		fwrite($this->logFile, $text);
-		fwrite($this->logFile, "\n");
-		fclose($this->logFile);
-	}
+        $logFile = fopen($this->path . $this->name, 'a+');
+        fwrite($logFile, $text);
+        fwrite($logFile, "\n");
+        fclose($logFile);
+    }
 }
-	
+
 ?>
