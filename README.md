@@ -60,7 +60,7 @@ $logger->error("Login", "An exception occurred: " . $ex->getMessage());
 ``` 
 
 ### Log file
-Based on the examples shown above the log file will be called myAppLog_2020-02-02.log and will look line this:
+Based on the examples shown above the log file will be called myAppLog_2020-02-02.log and will look like this:
 ```
 D/Home page [ 02/Feb/20 15:09:41 ]: Web app started!!!
 E/Login [ 02/Feb/20 15:10:35 ]: An exception occurred: Invalid credentials provided.
